@@ -388,7 +388,9 @@ var resultList = list.filterOnCondition { isMultipleOf(it, 5) }
 ```
 ## What's next?
 [Kotlin koans](https://kotlinlang.org/docs/tutorials/koans.html)
+
 [Coroutines](https://kotlinlang.org/docs/tutorials/coroutines-basic-jvm.html)
+
 [Androidx](https://developer.android.com/topic/libraries/support-library/androidx-overview)
 
 
