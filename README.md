@@ -41,7 +41,7 @@ a = 2
 val s2 = "${s1.replace("is", "was")}, but now is $a"
 ````
 
-## Using if as an expression:
+## Using if as an expression:
 ```kotlin
 fun maxOf(a: Int, b: Int) = if (a > b) a else b
 ```
@@ -108,7 +108,7 @@ fruits
 ```
 
   
-## Default function values
+## Default function values
 ```kotlin
 fun foo(a: Int = 0, b: String = "") { ... }
 ```
@@ -270,7 +270,7 @@ val r = ApiResponse<User>(User("name",20))
 
 ```
 
-Functions
+## Functions
 ```kotlin
 fun reformat(str: String,
              normalizeCase: Boolean = true,
@@ -387,9 +387,15 @@ for (number in 1..10){
 var resultList = list.filterOnCondition { isMultipleOf(it, 5) }
 ```
 
+## Resources
 https://kotlinlang.org/
+
 https://medium.com/google-developers/31daysofkotlin-week-1-recap-fbd5a622ef86
+
 https://medium.com/google-developers/31daysofkotlin-week-2-recap-9eedcd18ef8
+
 https://medium.com/google-developers/31daysofkotlin-week-3-recap-20b20ca9e205
+
 https://medium.com/google-developers/31daysofkotlin-week-4-recap-d820089f8090
+
 https://medium.com/@agrawalsuneet/higher-order-functions-in-kotlin-3d633a86f3d7
