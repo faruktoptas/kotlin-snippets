@@ -27,6 +27,9 @@ for (item in listWithNulls) {
 //elvis
 val l = b?.length ?: -1
 
+//early return
+myVar ?: return
+
 //for NPE-lovers
 val l = b!!.length
 ```
