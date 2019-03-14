@@ -483,6 +483,10 @@ class MyPresenter(private val view: BaseView) {
             view.hideLoading()
         }
     }
+    
+    fun onDestroy(){
+      job.cancel()
+    }
 }
 
 class MyInteractor(private val service: DummyService) {
