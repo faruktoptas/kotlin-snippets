@@ -389,6 +389,112 @@ for (number in 1..10){
 }
 var resultList = list.filterOnCondition { isMultipleOf(it, 5) }
 ```
+
+## Coroutines
+
+```kotlin
+GlobalScope.launch {
+    delay(2000) // Suspend function waits until completed
+    log("one")
+    delay(1000)
+    log("two")
+}
+log("three")
+
+/*
+Output will be
+0ms >    three
+2000ms > one
+3000ms > two
+*/
+```
+
+```kotlin
+runBlocking{
+    val job = GlobalScope.launch {
+        delay(2000)
+        log("one")
+    }
+    log("two")
+    job.join() // Job starts here waits until completed
+    log("three")
+}
+
+/*
+Output will be
+0ms >    two
+2000ms > one
+2000ms > three
+*/
+```
+
+```kotlin
+runBlocking {
+    log("zero")
+    launch { // launch block starts but doesn't wait to be completed. Because launch block is not suspend function
+        delay(200)
+        log("one")
+    }
+
+    launch {
+        delay(300)
+        log("two")
+    }
+    coroutineScope { // this block starts but waits for its all inner blocks until complete to process to the next line
+        launch {
+            delay(1000)
+            log("three")
+        }
+
+        delay(500)
+        log("four")
+    }
+    delay(1000)
+    log("five")
+}
+/*
+Output will be
+0ms > 	 zero
+200ms >  one
+300ms >  two
+500ms >  four
+1000ms > three
+2000ms > five
+*/
+```
+Simple Presenter-Interactor Retrofit service call
+```kotlin
+class MyPresenter(private val view: BaseView) {
+
+    private val job = Job()
+    private val dispatcher = Dispatchers.Main
+    private val uiScope = CoroutineScope(dispatcher + job)
+    val interactor = MyInteractor()
+
+    fun getResult() {
+        view.showLoading()
+
+        uiScope.launch {
+            val response = interactor.getResult()
+            response.response?.apply {
+                view.onGetResult(result)
+            }
+            response.error?.apply { view.onError(this) }
+            view.hideLoading()
+        }
+    }
+}
+
+class MyInteractor(private val service: DummyService) {
+
+    suspend fun getResult(): ApiResponse<ResultResponse> {
+        return service.getResult().defer()
+    }
+    
+}
+```
+
+
 ## What's next?
 [Kotlin koans](https://kotlinlang.org/docs/tutorials/koans.html)
 
