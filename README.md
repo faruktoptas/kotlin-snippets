@@ -217,6 +217,10 @@ fun MutableList<Int>.swap(index1: Int, index2: Int) {
   
 val l = mutableListOf(1, 2, 3)
 l.swap(0, 2) // 'this' inside 'swap()' will hold the value of 'l'
+
+fun Int?.orZero() = this ?: 0
+val myInt:Int? = null
+println("${myInt.orZero()}") // will print 0
 ```
 
 ## Data classes
