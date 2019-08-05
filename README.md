@@ -502,6 +502,39 @@ class MyInteractor(private val service: DummyService) {
 }
 ```
 
+Convert a Callback to suspend fun
+```kotlin
+fun callWithListener(listener: OnSomethingListener) {
+    if (condition) {
+        listener.onSuccess("success")
+    } else {
+        listener.onFail(Exception("fail"))
+    }
+}
+
+suspend fun convert2suspend(): String {
+    return suspendCoroutine { continuation ->
+        callWithListener(object : OnSomethingListener {
+            override fun onSuccess(data: String) {
+                continuation.resume(data)
+            }
+	    
+            override fun onFail(e: Exception) {
+                continuation.resumeWithException(e)
+            }
+        })
+    }
+}
+
+runBlocking {
+    try {
+        val response = convert2suspend()
+        println("response: $response")
+    } catch (e: Exception) {
+        println("failed: $e")
+    }
+}
+```
 
 ## What's next?
 [Kotlin koans](https://kotlinlang.org/docs/tutorials/koans.html)
