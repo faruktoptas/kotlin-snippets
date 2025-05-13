@@ -458,12 +458,12 @@ runBlocking {
 }
 /*
 Output will be
-0ms > 	 zero
-200ms >  one
-300ms >  two
-500ms >  four
-1000ms > three
-2000ms > five
+15.00.000 >  zero
+15.00.200 >  one
+15.00.300 >  two
+15.00.500 >  four
+15.01.000 >  three
+15.02.000 >  five
 */
 ```
 Simple Presenter-Interactor Retrofit service call
